@@ -32,8 +32,8 @@ public class Datav2 {
 	public static final  int PORT_NUMBER_CLIENT=6790;
 	public static final  int PORT_NUMBER_SERVER=6789;
 	public static final  int BUFFER_SIZE_CLIENT=32;
-	public static final  int NUM_UNIQUE_CHARACTERS=3000;
-	public static final  int PACKET_SIZE=2048;
+	public static final  int NUM_UNIQUE_CHARACTERS=12000;
+	public static final  int PACKET_SIZE=1024;
 	public static final  int VERBOSE=1;
 	public static final int PAUSE_DURATION=200;
 	public static final int DELAY_DURATION=100;
