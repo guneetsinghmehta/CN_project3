@@ -157,6 +157,7 @@ public class Cv32 {
 			//Thread.sleep(5000);	
 			
 			int cycles=0;int[] queryStatusNew=new int[4];
+			for(j=0;j<4;j++){delayTempOld[j]=delayTemp[j];}
 			//int queryStatusNewCorrect[]=new int[4];
 			
 			//add part that calculates the delays
