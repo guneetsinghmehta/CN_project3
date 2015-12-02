@@ -163,7 +163,7 @@ public class Functionsv2 {
 		}
 		writer.close();
 	}
-	
+	/*
 	public static double[] readSkFile() throws FileNotFoundException, IOException
 	{
 		String filename=Datav2.FILENAME_SKVALUES_STRING;
@@ -179,7 +179,7 @@ public class Functionsv2 {
 		}
 		return a;
 	}
-	
+	*/
 	public static String getAddressOfMinServer(double s1,double s2,double s3,double s4)
 	{
 		String ans = Datav2.SERVER1_ADDRESS;
