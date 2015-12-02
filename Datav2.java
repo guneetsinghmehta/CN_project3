@@ -48,5 +48,6 @@ public class Datav2 {
 	public static final float BETA=(float)0.9;
 	public static final int MAX_REPEAT=50;
 	public static final int SOCKET_TIMEOUT=250;
+	public static final String FILENAME_SKVALUES_STRING="SkValues.txt";
 	
 }

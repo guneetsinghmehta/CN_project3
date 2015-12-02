@@ -149,6 +149,21 @@ public class Functionsv2 {
 		return s1;
 	}
 	
+	public static void writeSkFile(double a[]) throws FileNotFoundException, UnsupportedEncodingException
+	{
+		//String filename="SkValues.txt";
+		String filename=Datav2.FILENAME_SKVALUES_STRING;
+		PrintWriter writer = new PrintWriter(filename, "UTF-8");
+		int i;
+		String s1;
+		for(i=0;i<a.length;i++)
+		{
+			s1=Double.toString(a[i]);
+			writer.println(s1);
+		}
+		writer.close();
+	}
+	
 	public static String getAddressOfMinServer(double s1,double s2,double s3,double s4)
 	{
 		String ans = Datav2.SERVER1_ADDRESS;
