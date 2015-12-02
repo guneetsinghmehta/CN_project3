@@ -12,7 +12,7 @@ public class Cv32Final {
 	
 	public static void main(String args[]) throws IOException, InterruptedException
 	{
-		commandOuter="no op";
+		commandOuter="play";
 		offset=0;
 		Thread inputThread = new Thread(new Runnable() {
 	        @Override
@@ -101,235 +101,26 @@ public class Cv32Final {
 		//asking for packets
 		for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i=i+4)
 		{	
-			s1TempAddress=Datav2.SERVER1_ADDRESS;s2TempAddress=Datav2.SERVER2_ADDRESS;s3TempAddress=Datav2.SERVER3_ADDRESS;s4TempAddress=Datav2.SERVER4_ADDRESS;
-			repliesReceived=0;
-			for(j=0;j<4;j++){delayTemp[j]=0;delayTempOld[j]=0;}
-			//sending requests
-			for(j=0;j<4;j++)
+			if(commandOuter.contains("play"))
 			{
-				requestString=Integer.toString(i+j+1);
-				if(j==0)
-				{
-					requestedServerAddress=Datav2.SERVER1_ADDRESS;
-					Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
-					delayTemp1=System.nanoTime();
-				}
-				else if(j==1)
-				{
-					requestedServerAddress=Datav2.SERVER2_ADDRESS;
-					Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
-					delayTemp2=System.nanoTime();
-				}
-				else if(j==2)
-				{
-					requestedServerAddress=Datav2.SERVER3_ADDRESS;
-					Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
-					delayTemp3=System.nanoTime();
-				}
-				else if(j==3)
-				{	
-					requestedServerAddress=Datav2.SERVER4_ADDRESS;
-					Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
-					delayTemp4=System.nanoTime();
-				}
-				//System.out.println();
-				//System.out.println(requestString+" req sent");
-				skt.send(request);
+				
 			}
-			//setting lost query to [0,0,0,0]
-			for(j=0;j<4;j++){queryStatus[j]=0;}
-			
-			//receiving replies
-			//System.out.println("receiving 4replies");
-			for(j=0;j<4;j++)
+			if(commandOuter.contains("pause"))
 			{
-				try
-				{
-					skt.receive(reply);
-					String replyServerName=reply.getAddress().toString();
-					replyServerName=replyServerName.substring(1,replyServerName.length());
-					if(Datav2.SERVER1_ADDRESS.contains(replyServerName))
-					{
-						delayTemp1=System.nanoTime()-delayTemp1;delayTemp1=delayTemp1/1000000;delayTemp1=delayTemp1;//+Datav2.DELAY_DURATION;
-						queryStatus[0]=1;
-						delayTemp[0]=delayTemp1;
-					}
-					else if(Datav2.SERVER2_ADDRESS.contains(replyServerName))
-					{
-						delayTemp2=System.nanoTime()-delayTemp2;delayTemp2=delayTemp2/1000000;delayTemp2=delayTemp2;//+Datav2.DELAY_DURATION;
-						queryStatus[1]=1;
-						delayTemp[1]=delayTemp2;
-					}
-					else if(Datav2.SERVER3_ADDRESS.contains(replyServerName))
-					{
-						delayTemp3=System.nanoTime()-delayTemp3;delayTemp3=delayTemp3/1000000;delayTemp3=delayTemp3;//+Datav2.DELAY_DURATION;
-						queryStatus[2]=1;
-						delayTemp[2]=delayTemp3;
-					}
-					else if(Datav2.SERVER4_ADDRESS.contains(replyServerName))
-					{
-						delayTemp4=System.nanoTime()-delayTemp4;delayTemp4=delayTemp4/1000000;delayTemp4=delayTemp4;//+Datav2.DELAY_DURATION;
-						queryStatus[3]=1;
-						delayTemp[3]=delayTemp4;
-					}
-				}
-				catch(Exception e)
-				{
-					System.out.println("timeout");
-				}
+				i=i-4;
 			}
-			for(j=0;j<4;j++)
+			if(commandOuter.contains("forward"))
 			{
-				if(delayTempOld[j]==delayTemp[j])
-				{
-					delayTemp[j]=delayTemp[j]+Datav2.SOCKET_TIMEOUT;
-				}
+				i=i+offset-1;//-1 because i has been increased by already
+				commandOuter="pause";
 			}
-			
-			for (j=0;j<4;j++)
+			if(commandOuter.contains("rewind"))
 			{
-				//System.out.print(" "+queryStatus[j]);
-				if(queryStatus[j]==1){repliesReceived++;}
+				i=i-offset-1;//-1 because i has been increased by already
+				commandOuter="pause";
 			}
-			//System.out.println();
-			//for(j=0;j<4;j++){System.out.print(" "+delayTemp[j]);}
-			//Thread.sleep(5000);	
-			
-			int cycles=0;int[] queryStatusNew=new int[4];
-			for(j=0;j<4;j++){delayTempOld[j]=delayTemp[j];}
-			//int queryStatusNewCorrect[]=new int[4];
-			
-			//add part that calculates the delays
-			//now writing the code that handles exception
-			while(repliesReceived<4)//Change Caution !!!! change to string server names
-			{
-				cycles++;
-				if(cycles==1)
-				{
-					for(j=0;j<4;j++){delayTempOld[j]=delayTemp[j];delayTemp[j]=0;}
-				}
-				//Thread.sleep(2000);
-				//System.out.println("packet(s) lost");
-				//determining which packets were lost
-					//setting inital values
-					for(j=0;j<4;j++){queryStatusNew[j]=0;}
-					
-					//cyclic exchange of server addresses 
-					// String s1TempAddress,s2TempAddress,s3TempAddress,s4TempAddress,sTempAddress;
-					sTempAddress=s4TempAddress;
-					s4TempAddress=s3TempAddress;
-					s3TempAddress=s2TempAddress;
-					s2TempAddress=s1TempAddress;
-					s1TempAddress=sTempAddress;					
-					
-					//sending repeat requests
-					for(j=0;j<4;j++)
-					{
-						requestString=Integer.toString(i+j+1);
-						if(j==0)
-						{
-							requestedServerAddress=s1TempAddress;
-							Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
-							delayTemp1=System.nanoTime();
-						}
-						else if(j==1)
-						{
-							requestedServerAddress=s2TempAddress;
-							Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
-							delayTemp2=System.nanoTime();
-						}
-						else if(j==2)
-						{
-							requestedServerAddress=s3TempAddress;
-							Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
-							delayTemp3=System.nanoTime();
-						}
-						else if(j==3)
-						{	
-							requestedServerAddress=s4TempAddress;
-							Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
-							delayTemp4=System.nanoTime();
-						}
-						//System.out.println("repeat req sent");
-						skt.send(request);
-					}
-					
-					//resetting queryStatusNew
-					for(j=0;j<4;j++){queryStatusNew[j]=0;}
-					//receiving replies
-				//	System.out.println("receiving 4 repeat replies");
-					
-					for(j=0;j<4;j++)
-					{
-						try
-						{
-							skt.receive(reply);
-							String replyServerName=reply.getAddress().toString();
-							replyServerName=replyServerName.substring(1,replyServerName.length());
-							if(s1TempAddress.contains(replyServerName))
-							{
-								delayTemp1=System.nanoTime()-delayTemp1;delayTemp1=delayTemp1/1000000;delayTemp1=delayTemp1;//+Datav2.DELAY_DURATION;
-								queryStatusNew[0]=1;
-								delayTemp[0]=delayTemp1;
-							}
-							else if(s2TempAddress.contains(replyServerName))
-							{
-								delayTemp2=System.nanoTime()-delayTemp2;delayTemp2=delayTemp2/1000000;delayTemp2=delayTemp2;//+Datav2.DELAY_DURATION;
-								queryStatusNew[1]=1;
-								delayTemp[1]=delayTemp2;
-							}
-							else if(s3TempAddress.contains(replyServerName))
-							{
-								delayTemp3=System.nanoTime()-delayTemp3;delayTemp3=delayTemp3/1000000;delayTemp3=delayTemp3;//+Datav2.DELAY_DURATION;
-								queryStatusNew[2]=1;
-								delayTemp[2]=delayTemp3;
-							}
-							else if(s4TempAddress.contains(replyServerName))
-							{
-								delayTemp4=System.nanoTime()-delayTemp4;delayTemp4=delayTemp4/1000000;delayTemp4=delayTemp4;//+Datav2.DELAY_DURATION;
-								queryStatusNew[3]=1;
-								delayTemp[3]=delayTemp4;
-							}
-						}
-						catch(Exception e)
-						{
-							System.out.println("timeout");
-						}
-					}
-					for(j=0;j<4;j++)
-					{
-						if(delayTemp[j]==0){delayTemp[j]=Datav2.SOCKET_TIMEOUT;}
-					}
-					
-					//queryStatusNewCorrect=reorderArray(queryStatusNew,cycles);
-					//delayTempNewCorrect=reorderArray(delayTempNew,cycles);
-					repliesReceived=0;
-					//System.out.println("in cycle="+cycles+" queryStatus=");
-					for(j=0;j<4;j++)
-					{
-						if(queryStatus[j]==0&&queryStatusNew[j]==0){delayTempOld[j]=delayTempOld[j]+Datav2.SOCKET_TIMEOUT;}
-						if(queryStatus[j]==0&&queryStatusNew[j]==1){delayTempOld[j]=delayTempOld[j]+delayTemp[j];}
-						if(queryStatus[j]==1){delayTempOld[j]=delayTempOld[j];}
-						
-						if(queryStatus[j]==1||queryStatusNew[j]==1){queryStatus[j]=1;repliesReceived++;}
-						if(queryStatus[j]*queryStatusNew[j]==0){}
-						//{delayTemp[j]=delayTemp[j]+delayTempNew[j];}
-						
-					}
-					//System.out.println("qS");
-					//for(j=0;j<4;j++){System.out.print(queryStatus[j]+" ");}
-					//System.out.println("");
-					//System.out.println("qSN");
-					//for(j=0;j<4;j++){System.out.print(queryStatusNew[j]+" ");}
-					//System.out.println("");
-					//System.out.println("delayTempOld");
-					//for(j=0;j<4;j++){System.out.print(delayTempOld[j]+" ");}
-					//System.out.println("");
-					//System.out.println("qSN");
-					//for(j=0;j<4;j++){System.out.println(queryStatusNew[j]);}
-					//end of repeat 
-			}
-			for(j=0;j<4;j++){delays[i+j]=delayTempOld[j];}
+			System.out.println(commandOuter+" "+offset);
+			Thread.sleep(1000);
 		}
 		Arrays.sort(delays);
 		for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i++)
