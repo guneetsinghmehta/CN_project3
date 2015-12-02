@@ -132,15 +132,15 @@ public class Cv32Final {
 					Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
 					delayTemp4=System.nanoTime();
 				}
-				System.out.println();
-				System.out.println(requestString+" req sent");
+				//System.out.println();
+				//System.out.println(requestString+" req sent");
 				skt.send(request);
 			}
 			//setting lost query to [0,0,0,0]
 			for(j=0;j<4;j++){queryStatus[j]=0;}
 			
 			//receiving replies
-			System.out.println("receiving 4replies");
+			//System.out.println("receiving 4replies");
 			for(j=0;j<4;j++)
 			{
 				try
@@ -188,11 +188,11 @@ public class Cv32Final {
 			
 			for (j=0;j<4;j++)
 			{
-				System.out.print(" "+queryStatus[j]);
+				//System.out.print(" "+queryStatus[j]);
 				if(queryStatus[j]==1){repliesReceived++;}
 			}
-			System.out.println();
-			for(j=0;j<4;j++){System.out.print(" "+delayTemp[j]);}
+			//System.out.println();
+			//for(j=0;j<4;j++){System.out.print(" "+delayTemp[j]);}
 			//Thread.sleep(5000);	
 			
 			int cycles=0;int[] queryStatusNew=new int[4];
@@ -257,7 +257,7 @@ public class Cv32Final {
 					//resetting queryStatusNew
 					for(j=0;j<4;j++){queryStatusNew[j]=0;}
 					//receiving replies
-					System.out.println("receiving 4 repeat replies");
+				//	System.out.println("receiving 4 repeat replies");
 					
 					for(j=0;j<4;j++)
 					{
@@ -304,7 +304,7 @@ public class Cv32Final {
 					//queryStatusNewCorrect=reorderArray(queryStatusNew,cycles);
 					//delayTempNewCorrect=reorderArray(delayTempNew,cycles);
 					repliesReceived=0;
-					System.out.println("in cycle="+cycles+" queryStatus=");
+					//System.out.println("in cycle="+cycles+" queryStatus=");
 					for(j=0;j<4;j++)
 					{
 						if(queryStatus[j]==0&&queryStatusNew[j]==0){delayTempOld[j]=delayTempOld[j]+Datav2.SOCKET_TIMEOUT;}
@@ -316,15 +316,15 @@ public class Cv32Final {
 						//{delayTemp[j]=delayTemp[j]+delayTempNew[j];}
 						
 					}
-					System.out.println("qS");
-					for(j=0;j<4;j++){System.out.print(queryStatus[j]+" ");}
-					System.out.println("");
-					System.out.println("qSN");
-					for(j=0;j<4;j++){System.out.print(queryStatusNew[j]+" ");}
-					System.out.println("");
-					System.out.println("delayTempOld");
-					for(j=0;j<4;j++){System.out.print(delayTempOld[j]+" ");}
-					System.out.println("");
+					//System.out.println("qS");
+					//for(j=0;j<4;j++){System.out.print(queryStatus[j]+" ");}
+					//System.out.println("");
+					//System.out.println("qSN");
+					//for(j=0;j<4;j++){System.out.print(queryStatusNew[j]+" ");}
+					//System.out.println("");
+					//System.out.println("delayTempOld");
+					//for(j=0;j<4;j++){System.out.print(delayTempOld[j]+" ");}
+					//System.out.println("");
 					//System.out.println("qSN");
 					//for(j=0;j<4;j++){System.out.println(queryStatusNew[j]);}
 					//end of repeat 
@@ -343,14 +343,14 @@ public class Cv32Final {
 		S100=Functionsv2.getSk(delaysFinal, 100);
 		S1000=Functionsv2.getSk(delaysFinal, 1000);
 		S3000=Functionsv2.getSk(delaysFinal, 3000);
-		System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000);
-		System.out.println("done");
+		//System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000);
+		//System.out.println("done");
 	}
 	public static int[] reorderArray(int array[],int cycles)
 	{
 		int answer[]=new int[4];
 		int i,j,temp;
-		System.out.println("in reorder cycles="+cycles);
+		//System.out.println("in reorder cycles="+cycles);
 		for(j=0;j<4;j++){answer[j]=array[j];}
 		for (i=0;i<cycles%4;i++)
 		{
@@ -358,8 +358,8 @@ public class Cv32Final {
 			for(j=0;j<3;j++)
 			{answer[j]=answer[j+1];}
 			answer[3]=temp;
-			for(j=0;j<4;j++){System.out.println(answer[j]);}
-			System.out.println();
+			//for(j=0;j<4;j++){System.out.println(answer[j]);}
+			//System.out.println();
 		}
 		return answer;
 	}
