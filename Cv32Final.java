@@ -119,7 +119,7 @@ public class Cv32Final {
 				i=i-offset-1;//-1 because i has been increased by already
 				commandOuter="pause";
 			}
-			System.out.println(commandOuter+" "+offset);
+			System.out.println(commandOuter+" "+offset+" "+i);
 			Thread.sleep(1000);
 		}
 		Arrays.sort(delays);
