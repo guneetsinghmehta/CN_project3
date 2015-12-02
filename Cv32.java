@@ -298,6 +298,7 @@ public class Cv32 {
 			delaysFinal[i]=delays[Datav2.NUM_UNIQUE_CHARACTERS-i-1];
 		}
 		double S2,S10,S20,S100,S1000,S3000,S12000;
+		
 		S2=Functionsv2.getSk(delaysFinal, 2);
 		S10=Functionsv2.getSk(delaysFinal, 10);
 		S20=Functionsv2.getSk(delaysFinal, 20);
@@ -305,6 +306,7 @@ public class Cv32 {
 		S1000=Functionsv2.getSk(delaysFinal, 1000);
 		S3000=Functionsv2.getSk(delaysFinal, 3000);
 		S12000=Functionsv2.getSk(delaysFinal, 12000);
+		System.out.println();
 		System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000+" S12000="+S12000);
 		System.out.println("done");
 		Functionsv2.writeSkFile(delaysFinal);
