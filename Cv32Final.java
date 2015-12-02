@@ -343,8 +343,8 @@ public class Cv32Final {
 		S100=Functionsv2.getSk(delaysFinal, 100);
 		S1000=Functionsv2.getSk(delaysFinal, 1000);
 		S3000=Functionsv2.getSk(delaysFinal, 3000);
-		//System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000);
-		//System.out.println("done");
+		System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000);
+		System.out.println("done");
 	}
 	public static int[] reorderArray(int array[],int cycles)
 	{
