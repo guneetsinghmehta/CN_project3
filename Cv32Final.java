@@ -337,7 +337,7 @@ public class Cv32Final {
 				commandOuter="pause";
 			}
 			//System.out.println(commandOuter+" "+offset+" "+i);
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 		}
 		Arrays.sort(delays);
 		for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i++)
