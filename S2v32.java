@@ -36,7 +36,7 @@ public class S2v32 {
 		for(i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i++)
 		{
 			skt.receive(request);
-			Functionsv2.delay();
+			//Functionsv2.delay();
 			requestString=Functionsv2.getPacketString(request);
 			//System.out.println(requestString+" Requested");
 			//System.out.println(requestString);
