@@ -347,14 +347,15 @@ public class Cv32FinalLog {
 			//Thread.sleep(1000);
 		}
 		//sending stop signal to servers
+		String lastRequest=new String();
 		for(j=0;j<4;j++)
 		{
-			requestString=Integer.toString(0);
+			lastRequest=Integer.toString(0);
 			if(j==0){requestedServerAddress=Datav2.SERVER1_ADDRESS;}
 			else if(j==1){requestedServerAddress=Datav2.SERVER2_ADDRESS;}
 			else if(j==2){requestedServerAddress=Datav2.SERVER3_ADDRESS;}
 			else if(j==3){requestedServerAddress=Datav2.SERVER4_ADDRESS;}
-			Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
+			Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, lastRequest);
 			skt.send(request);
 		}
 		writer.close();
@@ -373,6 +374,7 @@ public class Cv32FinalLog {
 		Functionsv2.writeSkFile(delaysFinal);
 		System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000);
 		System.out.println("done");
+		skt.close();
 	}
 	public static int[] reorderArray(int array[],int cycles)
 	{
