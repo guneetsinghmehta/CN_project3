@@ -353,8 +353,9 @@ public class Cv32FinalLog {
 			if(j==0){requestedServerAddress=Datav2.SERVER1_ADDRESS;}
 			else if(j==1){requestedServerAddress=Datav2.SERVER2_ADDRESS;}
 			else if(j==2){requestedServerAddress=Datav2.SERVER3_ADDRESS;}
-			else if(j==3){requestedServerAddress=Datav2.SERVER3_ADDRESS;}
+			else if(j==3){requestedServerAddress=Datav2.SERVER4_ADDRESS;}
 			Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
+			skt.send(request);
 		}
 		writer.close();
 		Arrays.sort(delays);
