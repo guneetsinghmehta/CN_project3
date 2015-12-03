@@ -58,7 +58,7 @@ public class Cv32FinalLog {
 		skt.setSoTimeout(Datav2.SOCKET_TIMEOUT);
 		DatagramPacket request=Functionsv2.createPacket();
 		DatagramPacket lastRequestPkt=Functionsv2.createPacket();
-		DatagramPacket reply=Functionsv2.createPacket();
+		DatagramPacket reply=Functionsv2.createServerPacket();
 		String msg="0";byte[] b=msg.getBytes();
 		request.setData(b);
 		//now contacting the serverss for the first time
@@ -430,7 +430,7 @@ public class Cv32FinalLog {
 		if(id==0){}
 		else if(id==1)
 		{
-			queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS, queryNumber.length()-1);
+			//queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS, queryNumber.length()-1);
 			System.out.println(queryNumber);
 			System.out.println(queryNumber.length());
 			//System.out.println(queryNumber.substring(Datav2., endIndex));
