@@ -363,7 +363,7 @@ public class Cv32FinalLog {
 			else if(j==3){requestedServerAddress=Datav2.SERVER4_ADDRESS;}
 			Functionsv2.updatePacket(lastRequestPkt, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, lastRequest);
 			skt.send(request);
-			logWrite(request,1);
+			logWrite(request,0);
 		}
 		writer.close();
 		Arrays.sort(delays);
