@@ -429,7 +429,8 @@ public class Cv32FinalLog {
 		String sFinal=null;
 		String temp=null;
 		
-		if(id==0){}
+		if(id==0)
+		{temp=queryNumber;}
 		else if(id==1)
 		{
 			//queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS, queryNumber.length());
