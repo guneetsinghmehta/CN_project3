@@ -43,11 +43,12 @@ public class S2v32 {
 		int query,i;query=0;
 		String replyString,requestString;
 		double delayTemp;
+		
 		for(i=0;i<Datav2.NUM_UNIQUE_CHARACTERS+4;i++)
 		{
 			skt.receive(request);
 			//Functionsv2.delay();
-			
+			java.text.NumberFormat nf=new java.text.DecimalFormat("00000");
 			requestString=Functionsv2.getPacketString(request);
 			writeLog(requestString);
 			//System.out.println(requestString);
@@ -65,6 +66,7 @@ public class S2v32 {
 				System.out.println(query+" Requested");
 				if(query==0){skt.close();System.out.println("socket closed");writer.close();return;}
 				replyString=Functionsv2.readPacketFromFile(textData, query+1);
+				requestString=nf.format(query);
 				replyString=replyString+requestString;
 				Functionsv2.updatePacket(reply, Datav2.CLIENT_ADDRESS, Datav2.PORT_NUMBER_CLIENT,replyString );
 				skt.send(reply);
