@@ -58,7 +58,7 @@ public class Functionsv2 {
 	
 	public static DatagramPacket createServerPacket()
 	{
-		byte [] buffer =new byte[Datav2.PACKET_SIZE+Integer.BYTES];
+		byte [] buffer =new byte[Datav2.PACKET_SIZE+4];
 		DatagramPacket pkt=new DatagramPacket(buffer,buffer.length);
 		return pkt;
 	}
