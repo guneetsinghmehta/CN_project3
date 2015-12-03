@@ -49,5 +49,10 @@ public class Datav2 {
 	public static final int MAX_REPEAT=50;
 	public static final int SOCKET_TIMEOUT=250;
 	public static final String FILENAME_SKVALUES_STRING="SkValues.txt";
+	public static final String FILENAME_CLIENT_LOG="ClientLog.txt";
+	public static final String FILENAME_SERVER1_LOG="Server1Log.txt";
+	public static final String FILENAME_SERVER2_LOG="Server2Log.txt";
+	public static final String FILENAME_SERVER3_LOG="Server3Log.txt";
+	public static final String FILENAME_SERVER4_LOG="Server4Log.txt";
 	
 }
