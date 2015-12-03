@@ -429,7 +429,7 @@ public class Cv32FinalLog {
 		sFinal=queryNumber+" "+Integer.toString(id)+" "+servername+" "+Double.toString((endTime-startTime)/1000000000)+" sec";
 		if(id==0){}
 		else if(id==1)
-		{sFinal=sFinal.substring(Datav2.NUM_UNIQUE_CHARACTERS, sFinal.length());}
+		{sFinal=sFinal.substring(Datav2.NUM_UNIQUE_CHARACTERS, sFinal.length()-1);}
 		writer.println(sFinal);
 	}
 }
