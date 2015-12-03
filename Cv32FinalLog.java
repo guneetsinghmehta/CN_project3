@@ -194,7 +194,7 @@ public class Cv32FinalLog {
 					}
 					catch(Exception e)
 					{
-						System.out.println("timeout");
+						System.out.println("timeout "+i);
 					}
 				}
 				for(j=0;j<4;j++)
