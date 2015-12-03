@@ -107,17 +107,11 @@ public class Cv32FinalLog {
 		
 		
 		//asking for packets
-		for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i=i+4)
+		for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS+4;i=i+4)
 		{	
 			if(commandOuter.contains("play"))
 			{
-				if(i==Datav2.NUM_UNIQUE_CHARACTERS-1)
-				{
-					System.out.println("ending");
-					skt.close();
-					writer.close();
-					break;
-				}
+				
 				s1TempAddress=Datav2.SERVER1_ADDRESS;s2TempAddress=Datav2.SERVER2_ADDRESS;s3TempAddress=Datav2.SERVER3_ADDRESS;s4TempAddress=Datav2.SERVER4_ADDRESS;
 				repliesReceived=0;
 				for(j=0;j<4;j++){delayTemp[j]=0;delayTempOld[j]=0;}
@@ -153,6 +147,13 @@ public class Cv32FinalLog {
 					//System.out.println(requestString+" req sent");
 					skt.send(request);
 					logWrite(request,0);
+				}
+				if(i>=Datav2.NUM_UNIQUE_CHARACTERS)
+				{
+					System.out.println("ending");
+					skt.close();
+					writer.close();
+					break;
 				}
 				//setting lost query to [0,0,0,0]
 				for(j=0;j<4;j++){queryStatus[j]=0;}
@@ -437,7 +438,7 @@ public class Cv32FinalLog {
 			//System.out.println(queryNumber);
 			//System.out.println(queryNumber.length());
 			//System.out.println(queryNumber.substring(0, 1024));
-			temp=queryNumber.substring(1024, queryNumber.length());
+			temp=queryNumber.substring(Datav2.PACKET_SIZE, queryNumber.length());
 			System.out.println(temp);
 			//System.out.println(queryNumber.substring(Datav2., endIndex));
 		}
