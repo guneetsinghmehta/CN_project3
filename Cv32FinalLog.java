@@ -8,8 +8,8 @@ import java.lang.instrument.Instrumentation;
 public class Cv32FinalLog {
 	public static volatile String commandOuter;
 	public static volatile int offset;
-	
-	
+	public static double startTime;
+	public static PrintWriter writer;
 	public static void main(String args[]) throws IOException, InterruptedException
 	{
 		commandOuter="play";
@@ -48,16 +48,16 @@ public class Cv32FinalLog {
 	    inputThread.start();
 
 		String filename=Datav2.FILENAME_SERVER4_LOG;
-		PrintWriter writer = new PrintWriter(filename, "UTF-8");
+		writer = new PrintWriter(filename, "UTF-8");
 		String sQuery;String sTime;//time is in milliseconds from start
-		double startTime,packetArrivalTime;
+		double packetArrivalTime;
 		startTime=System.nanoTime();
 	    
 		int i;
 		DatagramSocket skt=Functionsv2.createClientSocket();
 		skt.setSoTimeout(Datav2.SOCKET_TIMEOUT);
 		DatagramPacket request=Functionsv2.createPacket();
-		
+		DatagramPacket lastRequestPkt=Functionsv2.createPacket();
 		DatagramPacket reply=Functionsv2.createPacket();
 		String msg="0";byte[] b=msg.getBytes();
 		request.setData(b);
@@ -76,7 +76,9 @@ public class Cv32FinalLog {
 			reply.setAddress(host);reply.setPort(Datav2.PORT_NUMBER_SERVER);
 			Functionsv2.display("request sent by client");
 			skt.send(request);
+			logWrite(request,0);
 			skt.receive(reply);
+			logWrite(reply,1);
 			Functionsv2.display("reply received by client");
 		    String s1=new String(reply.getData()).trim();
 		    Functionsv2.display("filesize received from server"+i+"="+s1);
@@ -143,6 +145,7 @@ public class Cv32FinalLog {
 					//System.out.println();
 					//System.out.println(requestString+" req sent");
 					skt.send(request);
+					logWrite(request,0);
 				}
 				//setting lost query to [0,0,0,0]
 				for(j=0;j<4;j++){queryStatus[j]=0;}
@@ -154,6 +157,7 @@ public class Cv32FinalLog {
 					try
 					{
 						skt.receive(reply);
+						logWrite(reply,1);
 						String replyServerName=reply.getAddress().toString();
 						replyServerName=replyServerName.substring(1,replyServerName.length());
 						if(Datav2.SERVER1_ADDRESS.contains(replyServerName))
@@ -260,6 +264,7 @@ public class Cv32FinalLog {
 							}
 							//System.out.println("repeat req sent");
 							skt.send(request);
+							logWrite(request,0);
 						}
 						
 						//resetting queryStatusNew
@@ -272,6 +277,7 @@ public class Cv32FinalLog {
 							try
 							{
 								skt.receive(reply);
+								logWrite(reply,1);
 								String replyServerName=reply.getAddress().toString();
 								replyServerName=replyServerName.substring(1,replyServerName.length());
 								if(s1TempAddress.contains(replyServerName))
@@ -355,8 +361,9 @@ public class Cv32FinalLog {
 			else if(j==1){requestedServerAddress=Datav2.SERVER2_ADDRESS;}
 			else if(j==2){requestedServerAddress=Datav2.SERVER3_ADDRESS;}
 			else if(j==3){requestedServerAddress=Datav2.SERVER4_ADDRESS;}
-			Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, lastRequest);
+			Functionsv2.updatePacket(lastRequestPkt, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, lastRequest);
 			skt.send(request);
+			logWrite(request,1);
 		}
 		writer.close();
 		Arrays.sort(delays);
@@ -413,5 +420,17 @@ public class Cv32FinalLog {
 	{
 		String s1=serverName+" "+sQuery+" "+sTime;
 		writer.println(s1);
+	}
+	
+	public static void logWrite(DatagramPacket pkt,int id)
+	{
+		//queryNumber,id servername,time
+		//the packet number , sent/received -0/1 , servername,time
+		double endTime=System.nanoTime();
+		String servername=pkt.getAddress().toString();
+		String queryNumber= new String(pkt.getData()).trim();
+		String sFinal;
+		sFinal=queryNumber+" "+Integer.toString(id)+" "+servername+" "+Double.toString((endTime-startTime)/1000000000)+" sec";
+		writer.println(sFinal);
 	}
 }
