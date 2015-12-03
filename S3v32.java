@@ -58,6 +58,7 @@ public class S3v32 {
 			{
 				skt.close();
 				writer.close();
+				break;
 			}
 			else
 			{
