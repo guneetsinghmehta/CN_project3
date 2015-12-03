@@ -426,7 +426,7 @@ public class Cv32FinalLog {
 		String servername=pkt.getAddress().toString();
 		String queryNumber= new String(pkt.getData()).trim();
 		String sFinal=null;
-		String temp;
+		String temp=null;
 		
 		if(id==0){}
 		else if(id==1)
@@ -435,13 +435,13 @@ public class Cv32FinalLog {
 			//queryNumber=queryNumber.substring(0,Datav2.NUM_UNIQUE_CHARACTERS);
 			
 			System.out.println(queryNumber);
-			System.out.println(queryNumber.length());
-			System.out.println(queryNumber.substring(0, 1024));
-			System.out.println(queryNumber.substring(1024, queryNumber.length()));
+			//System.out.println(queryNumber.length());
+			//System.out.println(queryNumber.substring(0, 1024));
+			temp=queryNumber.substring(1024, queryNumber.length());
 			
 			//System.out.println(queryNumber.substring(Datav2., endIndex));
 		}
-		sFinal=queryNumber+" "+Integer.toString(id)+" "+servername+" "+Double.toString((endTime-startTime)/1000000000)+" sec";
+		sFinal=temp+" "+Integer.toString(id)+" "+servername+" "+Double.toString((endTime-startTime)/1000000000)+" sec";
 		writer.println(sFinal);
 	}
 }
