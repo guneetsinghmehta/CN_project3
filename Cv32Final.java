@@ -41,7 +41,7 @@ public class Cv32Final {
 	    				//System.out.println(offset);
 	    				//System.out.println(command);
 	    			}
-	    			//System.out.println(command);
+	    			//System.out.println (command);
 	    		}
 	        }
 	    });
@@ -344,6 +344,7 @@ public class Cv32Final {
 		{
 			delaysFinal[i]=delays[Datav2.NUM_UNIQUE_CHARACTERS-i-1];
 		}
+		Functionsv2.writeSkFile(delaysFinal);
 		double S2,S10,S20,S100,S1000,S3000;
 		S2=Functionsv2.getSk(delaysFinal, 2);
 		S10=Functionsv2.getSk(delaysFinal, 10);
