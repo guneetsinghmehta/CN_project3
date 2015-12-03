@@ -433,14 +433,7 @@ public class Cv32FinalLog {
 		{
 			//queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS, queryNumber.length());
 			queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS,queryNumber.length());
-			try
-			{
-			//temp=queryNumber.substring(0,1024);
-			}
-			catch(Exception e)
-			{
-				System.out.println(e);
-			}
+			
 			System.out.println(queryNumber);
 			System.out.println(queryNumber.length());
 			
