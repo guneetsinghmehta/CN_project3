@@ -111,7 +111,7 @@ public class Cv32FinalLog {
 		{	
 			if(commandOuter.contains("play"))
 			{
-				if(i>=Datav2.NUM_UNIQUE_CHARACTERS)
+				if(i>Datav2.NUM_UNIQUE_CHARACTERS)
 				{
 					System.out.println("ending");
 					skt.close();
