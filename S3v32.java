@@ -42,7 +42,7 @@ public class S3v32 {
 		int query,i;query=0;
 		String replyString,requestString;
 		double delayTemp;
-		for(i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i++)
+		for(i=0;i<Datav2.NUM_UNIQUE_CHARACTERS+4;i++)
 		{
 			skt.receive(request);
 			//Functionsv2.delay();
@@ -59,6 +59,11 @@ public class S3v32 {
 			Functionsv2.updatePacket(reply, Datav2.CLIENT_ADDRESS, Datav2.PORT_NUMBER_CLIENT,replyString );
 			skt.send(reply);
 			System.out.println(requestString+" Sent");
+			if(i>=Datav2.NUM_UNIQUE_CHARACTERS)
+			{
+				skt.close();
+				writer.close();
+			}
 		}
 	}
 	public static void writeLog(String sQuery)

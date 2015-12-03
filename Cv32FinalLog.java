@@ -107,7 +107,7 @@ public class Cv32FinalLog {
 		
 		
 		//asking for packets
-		for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i=i+4)
+		for (i=0;i<=Datav2.NUM_UNIQUE_CHARACTERS;i=i+4)
 		{	
 			if(commandOuter.contains("play"))
 			{
