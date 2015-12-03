@@ -376,6 +376,7 @@ public class Cv32FinalLog {
 		Functionsv2.writeSkFile(delaysFinal);
 		System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000);
 		System.out.println("done");
+		inputThread.stop();
 		
 	}
 	public static int[] reorderArray(int array[],int cycles)
