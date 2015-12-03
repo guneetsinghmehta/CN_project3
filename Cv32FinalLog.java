@@ -432,7 +432,7 @@ public class Cv32FinalLog {
 		else if(id==1)
 		{
 			//queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS, queryNumber.length());
-			//queryNumber=queryNumber.substring(0,Datav2.NUM_UNIQUE_CHARACTERS);
+			queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS,queryNumber.length());
 			try
 			{
 			temp=queryNumber.substring(0,1024);
