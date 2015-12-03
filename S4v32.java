@@ -51,8 +51,9 @@ public class S4v32 {
 			//System.out.println(requestString);
 			//requestString=requestString.substring(0, requestString.length());
 			query=Integer.parseInt(requestString);
-			if(query==0){skt.close();System.out.println("socket closed");writer.close();return;}
+			
 			System.out.println(query+" Requested");
+			if(query==0){skt.close();System.out.println("socket closed");writer.close();return;}
 			replyString=Functionsv2.readPacketFromFile(textData, query+1);
 			Functionsv2.updatePacket(reply, Datav2.CLIENT_ADDRESS, Datav2.PORT_NUMBER_CLIENT,replyString );
 			skt.send(reply);

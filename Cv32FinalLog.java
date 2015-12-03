@@ -46,7 +46,13 @@ public class Cv32FinalLog {
 	        }
 	    });
 	    inputThread.start();
-		
+
+		String filename=Datav2.FILENAME_SERVER4_LOG;
+		PrintWriter writer = new PrintWriter(filename, "UTF-8");
+		String sQuery;String sTime;//time is in milliseconds from start
+		double startTime,packetArrivalTime;
+		startTime=System.nanoTime();
+	    
 		int i;
 		DatagramSocket skt=Functionsv2.createClientSocket();
 		skt.setSoTimeout(Datav2.SOCKET_TIMEOUT);
@@ -350,7 +356,7 @@ public class Cv32FinalLog {
 			else if(j==3){requestedServerAddress=Datav2.SERVER3_ADDRESS;}
 			Functionsv2.updatePacket(request, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, requestString);
 		}
-		
+		writer.close();
 		Arrays.sort(delays);
 		for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i++)
 		{
@@ -398,5 +404,11 @@ public class Cv32FinalLog {
 			array[3]=temp;
 		}
 		return array;
+	}
+	
+	public static void openLog(PrintWriter writer,String sQuery,String sTime,String serverName)
+	{
+		String s1=serverName+" "+sQuery+" "+sTime;
+		writer.println(s1);
 	}
 }
