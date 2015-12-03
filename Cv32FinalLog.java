@@ -436,6 +436,8 @@ public class Cv32FinalLog {
 			
 			System.out.println(queryNumber);
 			System.out.println(queryNumber.length());
+			System.out.println(queryNumber.substring(0, 1024));
+			System.out.println(queryNumber.substring(1024, queryNumber.length()));
 			
 			//System.out.println(queryNumber.substring(Datav2., endIndex));
 		}
