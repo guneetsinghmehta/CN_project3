@@ -26,7 +26,7 @@ public class S3v32 {
 		DatagramSocket skt=Functionsv2.createServerSocket();
 		//skt.setSoTimeout(10*Datav2.SOCKET_TIMEOUT);
 		DatagramPacket request=Functionsv2.createPacket();//client request
-		DatagramPacket reply=Functionsv2.createPacket();//reply to client request	
+		DatagramPacket reply=Functionsv2.createServerPacket();//reply to client request	
 		startTime=System.nanoTime();
 		System.out.println("server listenting");
 		skt.receive(request);
