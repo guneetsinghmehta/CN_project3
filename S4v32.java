@@ -47,7 +47,7 @@ public class S4v32 {
 			sTime=Double.toString((double)(packetArrivalTime-startTime)/1000000);
 			sQuery=Integer.toString(query);
 			requestString=Functionsv2.getPacketString(request);
-			
+			writeLog(writer,sQuery,sTime);
 			//System.out.println(requestString);
 			//requestString=requestString.substring(0, requestString.length());
 			query=Integer.parseInt(requestString);
@@ -60,7 +60,7 @@ public class S4v32 {
 			System.out.println(requestString+" Sent");
 		}
 	}
-	public static void openLog(PrintWriter writer,String sQuery,String sTime)
+	public static void writeLog(PrintWriter writer,String sQuery,String sTime)
 	{
 		String s1=" "+sQuery+" "+sTime;
 		writer.println(s1);
