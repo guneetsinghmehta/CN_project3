@@ -8,6 +8,12 @@ import java.lang.instrument.Instrumentation;
 public class S3v32 {
 	public static void main(String args[]) throws IOException, InterruptedException
 	{
+		String filename=Datav2.FILENAME_SERVER3_LOG;
+		PrintWriter writer = new PrintWriter(filename, "UTF-8");
+		String sQuery;String sTime;//time is in milliseconds from start
+		double startTime,packetArrivalTime;
+		startTime=System.nanoTime();
+		
 		Functionsv2.makeTextFile(Datav2.FILENAME);
 		FileReader fr=new FileReader(Datav2.FILENAME);BufferedReader textReader=new BufferedReader(fr);
 		char[] textData=textReader.readLine().toCharArray();
@@ -30,24 +36,32 @@ public class S3v32 {
 		reply.setData(filesizeString.getBytes());
 		//Functionsv2.display("reply sent to  client");
 		skt.send(reply);
-		int query,i;
+		int query,i;query=0;
 		String replyString,requestString;
 		double delayTemp;
 		for(i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i++)
 		{
 			skt.receive(request);
 			//Functionsv2.delay();
+			packetArrivalTime=System.nanoTime();
+			sTime=Double.toString((double)(packetArrivalTime-startTime)/1000000);
+			sQuery=Integer.toString(query);
 			requestString=Functionsv2.getPacketString(request);
-			//System.out.println(requestString+" Requested");
+			
 			//System.out.println(requestString);
 			//requestString=requestString.substring(0, requestString.length());
 			query=Integer.parseInt(requestString);
-			if(query==0){skt.close();System.out.println("socket closed");return;}
+			if(query==0){skt.close();System.out.println("socket closed");writer.close();return;}
 			System.out.println(query+" Requested");
 			replyString=Functionsv2.readPacketFromFile(textData, query+1);
 			Functionsv2.updatePacket(reply, Datav2.CLIENT_ADDRESS, Datav2.PORT_NUMBER_CLIENT,replyString );
 			skt.send(reply);
 			System.out.println(requestString+" Sent");
 		}
+	}
+	public static void openLog(PrintWriter writer,String sQuery,String sTime)
+	{
+		String s1=" "+sQuery+" "+sTime;
+		writer.println(s1);
 	}
 }
