@@ -11,7 +11,7 @@ public class S3v32 {
 	public static double startTime=0;
 	public static void main(String args[]) throws IOException, InterruptedException
 	{
-		String filename=Datav2.FILENAME_SERVER1_LOG;
+		String filename=Datav2.FILENAME_SERVER3_LOG;
 		writer = new PrintWriter(filename, "UTF-8");
 		String sQuery;String sTime;//time is in milliseconds from start
 		double startTime,packetArrivalTime;
@@ -58,13 +58,15 @@ public class S3v32 {
 				skt.close();
 				writer.close();
 			}
-			System.out.println(query+" Requested");
-			if(query==0){skt.close();System.out.println("socket closed");writer.close();return;}
-			replyString=Functionsv2.readPacketFromFile(textData, query+1);
-			Functionsv2.updatePacket(reply, Datav2.CLIENT_ADDRESS, Datav2.PORT_NUMBER_CLIENT,replyString );
-			skt.send(reply);
-			System.out.println(requestString+" Sent");
-			
+			else
+			{
+				System.out.println(query+" Requested");
+				if(query==0){skt.close();System.out.println("socket closed");writer.close();return;}
+				replyString=Functionsv2.readPacketFromFile(textData, query+1);
+				Functionsv2.updatePacket(reply, Datav2.CLIENT_ADDRESS, Datav2.PORT_NUMBER_CLIENT,replyString );
+				skt.send(reply);
+				System.out.println(requestString+" Sent");
+			}
 		}
 	}
 	public static void writeLog(String sQuery)

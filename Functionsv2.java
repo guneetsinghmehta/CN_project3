@@ -56,13 +56,10 @@ public class Functionsv2 {
 		pkt.setData(packetData.getBytes());
 	}	
 	
-	public static DatagramPacket createSeverPacket(String destinationInetAddreess, int destinationHostPortNumber,String packetData) throws UnknownHostException
+	public static DatagramPacket createServerPacket()
 	{
-		byte [] buffer =new byte[Datav2.PACKET_SIZE+Integer.SIZE];
+		byte [] buffer =new byte[Datav2.PACKET_SIZE+Integer.BYTES];
 		DatagramPacket pkt=new DatagramPacket(buffer,buffer.length);
-		pkt.setAddress(InetAddress.getByName(destinationInetAddreess));
-		pkt.setPort(destinationHostPortNumber);
-		pkt.setData(packetData.getBytes());
 		return pkt;
 	}
 
