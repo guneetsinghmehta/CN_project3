@@ -76,9 +76,9 @@ public class Cv32FinalLog {
 			reply.setAddress(host);reply.setPort(Datav2.PORT_NUMBER_SERVER);
 			Functionsv2.display("request sent by client");
 			skt.send(request);
-			logWrite(request,0);
+			//logWrite(request,0);
 			skt.receive(reply);
-			logWrite(reply,1);
+			//logWrite(reply,1);
 			Functionsv2.display("reply received by client");
 		    String s1=new String(reply.getData()).trim();
 		    Functionsv2.display("filesize received from server"+i+"="+s1);
