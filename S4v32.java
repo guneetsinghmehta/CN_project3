@@ -54,7 +54,7 @@ public class S4v32 {
 			//requestString=requestString.substring(0, requestString.length());
 			query=Integer.parseInt(requestString);
 			
-			if(query>=Datav2.NUM_UNIQUE_CHARACTERS)
+			if(query>=Datav2.NUM_UNIQUE_CHARACTERS+1)
 			{
 				skt.close();
 				writer.close();
