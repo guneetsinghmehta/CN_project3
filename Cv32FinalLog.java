@@ -148,7 +148,7 @@ public class Cv32FinalLog {
 					skt.send(request);
 					logWrite(request,0);
 				}
-				if(i>=Datav2.NUM_UNIQUE_CHARACTERS)
+				if(i>=Datav2.NUM_UNIQUE_CHARACTERS-1)
 				{
 					System.out.println("ending");
 					skt.close();
