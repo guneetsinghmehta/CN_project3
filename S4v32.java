@@ -12,10 +12,11 @@ public class S4v32 {
 	public static void main(String args[]) throws IOException, InterruptedException
 	{
 		String filename=Datav2.FILENAME_SERVER4_LOG;
+		
 		writer = new PrintWriter(filename, "UTF-8");
 		String sQuery;String sTime;//time is in milliseconds from start
-		double startTime,packetArrivalTime;
-		startTime=System.nanoTime();
+		double packetArrivalTime;
+		
 		
 		Functionsv2.makeTextFile(Datav2.FILENAME);
 		FileReader fr=new FileReader(Datav2.FILENAME);BufferedReader textReader=new BufferedReader(fr);
@@ -26,7 +27,7 @@ public class S4v32 {
 		//skt.setSoTimeout(10*Datav2.SOCKET_TIMEOUT);
 		DatagramPacket request=Functionsv2.createPacket();//client request
 		DatagramPacket reply=Functionsv2.createPacket();//reply to client request	
-		
+		startTime=System.nanoTime();
 		System.out.println("server listenting");
 		skt.receive(request);
 		System.out.println("request received from client");
