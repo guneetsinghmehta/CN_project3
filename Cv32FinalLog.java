@@ -432,11 +432,23 @@ public class Cv32FinalLog {
 		else if(id==1)
 		{
 			//queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS, queryNumber.length());
-			queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS,queryNumber.length());
-			
+			//queryNumber=queryNumber.substring(0,Datav2.NUM_UNIQUE_CHARACTERS);
+			try
+			{
+			temp=queryNumber.substring(0,1024);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e);
+			}
 			System.out.println(queryNumber);
 			System.out.println(queryNumber.length());
-			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//System.out.println(queryNumber.substring(Datav2., endIndex));
 		}
 		sFinal=queryNumber+" "+Integer.toString(id)+" "+servername+" "+Double.toString((endTime-startTime)/1000000000)+" sec";
