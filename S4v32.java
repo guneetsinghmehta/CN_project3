@@ -6,10 +6,13 @@ import java.util.*;
 import java.lang.instrument.Instrumentation;
 
 public class S4v32 {
+	
+	public static PrintWriter writer=null;
+	public static double startTime=0;
 	public static void main(String args[]) throws IOException, InterruptedException
 	{
 		String filename=Datav2.FILENAME_SERVER4_LOG;
-		PrintWriter writer = new PrintWriter(filename, "UTF-8");
+		writer = new PrintWriter(filename, "UTF-8");
 		String sQuery;String sTime;//time is in milliseconds from start
 		double startTime,packetArrivalTime;
 		startTime=System.nanoTime();
@@ -43,11 +46,9 @@ public class S4v32 {
 		{
 			skt.receive(request);
 			//Functionsv2.delay();
-			packetArrivalTime=System.nanoTime();
-			sTime=Double.toString((double)(packetArrivalTime-startTime)/1000000);
-			sQuery=Integer.toString(query);
+			
 			requestString=Functionsv2.getPacketString(request);
-			writeLog(writer,sQuery,sTime);
+			writeLog(requestString);
 			//System.out.println(requestString);
 			//requestString=requestString.substring(0, requestString.length());
 			query=Integer.parseInt(requestString);
@@ -60,8 +61,11 @@ public class S4v32 {
 			System.out.println(requestString+" Sent");
 		}
 	}
-	public static void writeLog(PrintWriter writer,String sQuery,String sTime)
+	public static void writeLog(String sQuery)
 	{
+		String sTime;
+		double endTime=System.nanoTime();
+		sTime=Double.toString((endTime-startTime)/1000000000);
 		String s1=" "+sQuery+" "+sTime;
 		writer.println(s1);
 	}

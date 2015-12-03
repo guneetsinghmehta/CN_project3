@@ -47,7 +47,7 @@ public class Cv32FinalLog {
 	    });
 	    inputThread.start();
 
-		String filename=Datav2.FILENAME_SERVER4_LOG;
+		String filename=Datav2.FILENAME_CLIENT_LOG;
 		writer = new PrintWriter(filename, "UTF-8");
 		String sQuery;String sTime;//time is in milliseconds from start
 		double packetArrivalTime;
@@ -382,6 +382,7 @@ public class Cv32FinalLog {
 		System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000);
 		System.out.println("done");
 		skt.close();
+		writer.close();
 	}
 	public static int[] reorderArray(int array[],int cycles)
 	{
@@ -429,7 +430,7 @@ public class Cv32FinalLog {
 		double endTime=System.nanoTime();
 		String servername=pkt.getAddress().toString();
 		String queryNumber= new String(pkt.getData()).trim();
-		String sFinal;
+		String sFinal=null;
 		sFinal=queryNumber+" "+Integer.toString(id)+" "+servername+" "+Double.toString((endTime-startTime)/1000000000)+" sec";
 		writer.println(sFinal);
 	}
