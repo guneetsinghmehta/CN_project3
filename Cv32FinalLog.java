@@ -111,6 +111,12 @@ public class Cv32FinalLog {
 		{	
 			if(commandOuter.contains("play"))
 			{
+				if(i>=Datav2.NUM_UNIQUE_CHARACTERS)
+				{
+					skt.close();
+					writer.close();
+					break;
+				}
 				s1TempAddress=Datav2.SERVER1_ADDRESS;s2TempAddress=Datav2.SERVER2_ADDRESS;s3TempAddress=Datav2.SERVER3_ADDRESS;s4TempAddress=Datav2.SERVER4_ADDRESS;
 				repliesReceived=0;
 				for(j=0;j<4;j++){delayTemp[j]=0;delayTempOld[j]=0;}
@@ -353,19 +359,7 @@ public class Cv32FinalLog {
 			//Thread.sleep(1000);
 		}
 		//sending stop signal to servers
-		String lastRequest=new String();
-		for(j=0;j<4;j++)
-		{
-			lastRequest=Integer.toString(0);
-			if(j==0){requestedServerAddress=Datav2.SERVER1_ADDRESS;}
-			else if(j==1){requestedServerAddress=Datav2.SERVER2_ADDRESS;}
-			else if(j==2){requestedServerAddress=Datav2.SERVER3_ADDRESS;}
-			else if(j==3){requestedServerAddress=Datav2.SERVER4_ADDRESS;}
-			Functionsv2.updatePacket(lastRequestPkt, requestedServerAddress, Datav2.PORT_NUMBER_SERVER, lastRequest);
-			skt.send(request);
-			logWrite(request,0);
-		}
-		writer.close();
+		
 		Arrays.sort(delays);
 		for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i++)
 		{
@@ -381,8 +375,7 @@ public class Cv32FinalLog {
 		Functionsv2.writeSkFile(delaysFinal);
 		System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000);
 		System.out.println("done");
-		skt.close();
-		writer.close();
+		
 	}
 	public static int[] reorderArray(int array[],int cycles)
 	{
