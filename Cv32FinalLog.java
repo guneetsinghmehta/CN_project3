@@ -430,10 +430,11 @@ public class Cv32FinalLog {
 		if(id==0){}
 		else if(id==1)
 		{
-			queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS, queryNumber.length());
+			//queryNumber=queryNumber.substring(Datav2.NUM_UNIQUE_CHARACTERS, queryNumber.length());
 			queryNumber=queryNumber.substring(0,Datav2.NUM_UNIQUE_CHARACTERS);
 			System.out.println(queryNumber);
 			System.out.println(queryNumber.length());
+			Thread.sleep(1000);
 			//System.out.println(queryNumber.substring(Datav2., endIndex));
 		}
 		sFinal=queryNumber+" "+Integer.toString(id)+" "+servername+" "+Double.toString((endTime-startTime)/1000000000)+" sec";
