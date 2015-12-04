@@ -10,6 +10,7 @@ public class Cv32FinalLog {
 	public static volatile int offset;
 	public static double startTime;
 	public static PrintWriter writer;
+	java.text.NumberFormat nf=new java.text.DecimalFormat("00000");
 	public static void main(String args[]) throws IOException, InterruptedException
 	{
 		commandOuter="play";
@@ -148,6 +149,7 @@ public class Cv32FinalLog {
 					skt.send(request);
 					logWrite(request,0);
 				}
+				/*
 				if(i>=Datav2.NUM_UNIQUE_CHARACTERS-1)
 				{
 					System.out.println("ending");
@@ -155,6 +157,7 @@ public class Cv32FinalLog {
 					writer.close();
 					break;
 				}
+				*/
 				//setting lost query to [0,0,0,0]
 				for(j=0;j<4;j++){queryStatus[j]=0;}
 				
@@ -359,6 +362,13 @@ public class Cv32FinalLog {
 			
 			//System.out.println(commandOuter+" "+offset+" "+i);
 			//Thread.sleep(1000);
+			if(i>=Datav2.NUM_UNIQUE_CHARACTERS-4)
+			{
+				System.out.println("ending");
+				skt.close();
+				writer.close();
+				break;
+			}
 		}
 		//sending stop signal to servers
 		
