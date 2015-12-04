@@ -362,7 +362,7 @@ public class Cv32FinalLog {
 			
 			//System.out.println(commandOuter+" "+offset+" "+i);
 			//Thread.sleep(1000);
-			if(i>=Datav2.NUM_UNIQUE_CHARACTERS-4)
+			if(i>=Datav2.NUM_UNIQUE_CHARACTERS-1)
 			{
 				System.out.println("ending");
 				skt.close();

@@ -55,8 +55,13 @@ public class S4v32 {
 			//requestString=requestString.substring(0, requestString.length());
 			query=Integer.parseInt(requestString);
 			
-			
-			if(query<=Datav2.NUM_UNIQUE_CHARACTERS)
+			if(query>=Datav2.NUM_UNIQUE_CHARACTERS)
+			{
+				skt.close();
+				writer.close();
+				break;
+			}
+			else
 			{
 				System.out.println(query+" Requested");
 				if(query==0){skt.close();System.out.println("socket closed");writer.close();return;}
@@ -66,12 +71,6 @@ public class S4v32 {
 				Functionsv2.updatePacket(reply, Datav2.CLIENT_ADDRESS, Datav2.PORT_NUMBER_CLIENT,replyString );
 				skt.send(reply);
 				System.out.println(requestString+" Sent");
-			}
-			else
-			{
-				skt.close();
-				writer.close();
-				break;
 			}
 		}
 	}
