@@ -57,6 +57,7 @@ public class S2v32 {
 			
 			if(query>=Datav2.NUM_UNIQUE_CHARACTERS)
 			{
+				skt.send(reply);
 				skt.close();
 				writer.close();
 				break;
