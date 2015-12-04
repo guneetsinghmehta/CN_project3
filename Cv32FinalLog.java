@@ -107,7 +107,7 @@ public class Cv32FinalLog {
 		int[] queryStatus=new int[4];int j;int repliesReceived=0;
 		String s1TempAddress,s2TempAddress,s3TempAddress,s4TempAddress,sTempAddress;
 		
-		
+		int EXIT_FLAG=0;
 		//asking for packets
 		for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS+4;i=i+4)
 		{	
@@ -342,7 +342,9 @@ public class Cv32FinalLog {
 									System.out.println("ending");
 									skt.close();
 									writer.close();
+									EXIT_FLAG=1;
 									break;
+									
 								}
 							}
 						}
@@ -391,6 +393,8 @@ public class Cv32FinalLog {
 			{
 				
 			}
+			if(EXIT_FLAG==1)
+			{break;}
 		}
 		//sending stop signal to servers
 		/*
