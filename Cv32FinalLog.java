@@ -320,6 +320,30 @@ public class Cv32FinalLog {
 							catch(Exception e)
 							{
 								System.out.println("timeout in repeat"+i);
+								if(i==12000)
+								{
+									Arrays.sort(delays);
+									for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i++)
+									{
+										delaysFinal[i]=delays[Datav2.NUM_UNIQUE_CHARACTERS-i-1];
+									}
+									double S2,S10,S20,S100,S1000,S3000,S12000;
+									S2=Functionsv2.getSk(delaysFinal, 2);
+									S10=Functionsv2.getSk(delaysFinal, 10);
+									S20=Functionsv2.getSk(delaysFinal, 20);
+									S100=Functionsv2.getSk(delaysFinal, 100);
+									S1000=Functionsv2.getSk(delaysFinal, 1000);
+									S3000=Functionsv2.getSk(delaysFinal, 3000);
+									S12000=Functionsv2.getSk(delaysFinal, 12000);
+									Functionsv2.writeSkFile(delaysFinal);
+									System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000+" S12000="+S12000);
+									System.out.println("done");
+									inputThread.stop();
+									System.out.println("ending");
+									skt.close();
+									writer.close();
+									break;
+								}
 							}
 						}
 						for(j=0;j<4;j++)
@@ -365,14 +389,11 @@ public class Cv32FinalLog {
 			//Thread.sleep(1000);
 			if(i>=Datav2.NUM_UNIQUE_CHARACTERS-1)
 			{
-				System.out.println("ending");
-				skt.close();
-				writer.close();
-				break;
+				
 			}
 		}
 		//sending stop signal to servers
-		
+		/*
 		Arrays.sort(delays);
 		for (i=0;i<Datav2.NUM_UNIQUE_CHARACTERS;i++)
 		{
@@ -389,7 +410,7 @@ public class Cv32FinalLog {
 		System.out.println("S2="+S2+" S10="+S10+" S20="+S20+" S100="+S100+" S1000="+S1000+" S3000="+S3000);
 		System.out.println("done");
 		inputThread.stop();
-		
+		*/
 	}
 	public static int[] reorderArray(int array[],int cycles)
 	{
